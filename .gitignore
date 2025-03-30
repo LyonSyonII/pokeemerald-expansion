@@ -45,3 +45,5 @@ tools/trainerproc/trainerproc
 *.smol
 *.fastSmol
 *.smolTM
+.direnv
+.cache

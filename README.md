@@ -1,3 +1,9 @@
+# Joc Pokemon
+## Enllaços
+- Wiki pokeemerald: https://github.com/pret/pokeemerald/wiki
+- Wiki pokeemerald-expansion: https://rh-hideout.github.io/pokeemerald-expansion/index.html
+- Wiki porymap (editor mapa): https://huderlem.github.io/porymap/index.html
+
 # pokeemerald-expansion
 
 pokeemerald-expansion is ***a romhack base*** based off pret's [pokeemerald](https://github.com/pret/pokeemerald) decompilation project. ***It is NOT a playable romhack,*** but it has multiple features available to romhackers so that they can create their own games, so it's not meant to be played on its own.

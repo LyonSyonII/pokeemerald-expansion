@@ -1,0 +1,10 @@
+mapscripts TestCity_MapScripts { }
+
+script TestCity_Girl {
+    msgbox(
+        format(
+            "Hey! I'm a test girl!"
+            "I love being a test girl :)"
+        )
+    )
+}
