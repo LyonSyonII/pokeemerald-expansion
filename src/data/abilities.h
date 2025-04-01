@@ -1,3 +1,10 @@
+#ifndef GUARD_DATA_ABILITIES_H
+#include "constants/abilities.h"
+#include "metaprogram.h"
+#include "gba/types.h"
+#include "global.h"
+#define GUARD_DATA_ABILITIES_H
+
 const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 {
     [ABILITY_NONE] =
@@ -1570,12 +1577,12 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Disguise"),
         .description = COMPOUND_STRING("Decoy protects it once."),
         .aiRating = 8,
-        .breakable = TRUE,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
         .cantBeSuppressed = TRUE,
         .cantBeOverwritten = TRUE,
+        .breakable = TRUE,
         .failsOnImposter = TRUE,
     },
 
@@ -2409,3 +2416,5 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeTraced = TRUE,
     },
 };
+
+#endif

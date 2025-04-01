@@ -1,3 +1,8 @@
+#include "gba/types.h"
+#include "graphics.h"
+#include "constants/battle_anim.h"
+#include "../include/battle_anim.h"
+
 const struct OamData gOamData_AffineOff_ObjNormal_8x8 =
 {
     .y = 0,

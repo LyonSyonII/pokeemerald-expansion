@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "name": "GBA",
+            "includePath": [
+                "${workspaceFolder}",
+                "${workspaceFolder}/include",
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "DEBUG",
+                "DINFO",
+                "_MSC_VER"
+            ],
+            "intelliSenseMode": "gcc-arm",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },        
+            "cStandard": "c99",
+            // "compilerPath": "/usr/bin/gcc"
+        }
+    ],
+    "version": 4
+}
