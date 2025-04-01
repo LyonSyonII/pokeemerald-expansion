@@ -464,6 +464,5 @@ $(ROM): $(ELF)
 $(SYM): $(ELF)
 	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" | $(PERL) -p -e 's/^(\w{8}) (\w).{6} \S+\t(\w{8}) (\S+)$$/\1 \2 \3 \4/g' > $@
 
-run:
-	make -j$(shell nproc)
-	mgba pokeemerald.gba
+run: all
+	QT_QPA_PLATFORM=xcb tools/mgba/mgba$(EXE) -4 --savestate pokeemerald.ss1 pokeemerald.gba

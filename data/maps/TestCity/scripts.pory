@@ -1,10 +1,11 @@
 mapscripts TestCity_MapScripts { }
 
 script TestCity_Girl {
-    msgbox(
-        format(
-            "Hey! I'm a test girl!"
-            "I love being a test girl :)"
-        )
-    )
+    lockall
+    faceplayer
+    msgbox(format(
+        "Hey! I'm a test girl!"
+    ))
+    releaseall
+    end
 }

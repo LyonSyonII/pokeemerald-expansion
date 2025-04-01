@@ -335,7 +335,7 @@ static void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
     if (sPokedexAreaScreen->numSpecialAreas < MAX_AREA_MARKERS)
     {
         u16 regionMapSectionId = GetRegionMapSectionId(mapGroup, mapNum);
-        if (regionMapSectionId < MAPSEC_NONE)
+        if (regionMapSectionId < MAPSEC_TRUE_NONE)
         {
             // Don't highlight the area if it's a moving area (Marine/Terra Cave)
             for (i = 0; i < ARRAY_COUNT(sMovingRegionMapSections); i++)
@@ -345,7 +345,7 @@ static void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
             }
 
             // Don't highlight the area if it's an undiscovered landmark (e.g. Sky Pillar)
-            for (i = 0; sLandmarkData[i][0] != MAPSEC_NONE; i++)
+            for (i = 0; sLandmarkData[i][0] != MAPSEC_TRUE_NONE; i++)
             {
                 if (regionMapSectionId == sLandmarkData[i][0] && !FlagGet(sLandmarkData[i][1]))
                     return;
