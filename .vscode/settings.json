@@ -3,5 +3,10 @@
         "${default}",
         "${workspaceFolder}",
         "${workspaceFolder}/include"
-    ]
+    ],
+    "files.associations": {
+        "*.pas": "pascal",
+        "*.toml.bytes": "toml",
+        "global.h": "c"
+    }
 }

@@ -2415,6 +2415,14 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
     },
+
+    // START CUSTOM
+    [ABILITY_SCARE] = {
+        .name = _("Scare"),
+        .description = COMPOUND_STRING("Lowers the foe's Special Attack."),
+        .aiRating = 7,
+    }
+    // END CUSTOM
 };
 
 #endif

@@ -7792,6 +7792,82 @@ BattleScript_IntimidateInReverse:
 	call BattleScript_TryIntimidateHoldEffects
 	goto BattleScript_IntimidateLoopIncrement
 
+// START CUSTOM INTIMIDATE (Stat Lower on change)
+BattleScript_ScareActivates::
+	savetarget
+.if B_ABILITY_POP_UP == TRUE
+	showabilitypopup BS_ATTACKER
+	pause B_WAIT_TIME_LONG
+	destroyabilitypopup
+.endif
+	setbyte gBattlerTarget, 0
+BattleScript_ScareLoop:
+	jumpifbyteequal gBattlerTarget, gBattlerAttacker, BattleScript_ScareLoopIncrement
+	jumpiftargetally BattleScript_ScareLoopIncrement
+	jumpifabsent BS_TARGET, BattleScript_ScareLoopIncrement
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ScareLoopIncrement
+.if B_UPDATED_INTIMIDATE >= GEN_8 @These abilties specifically prevent just Intimidate, without blocking stat decreases
+	jumpifability BS_TARGET, ABILITY_INNER_FOCUS, BattleScript_ScarePrevented
+	jumpifability BS_TARGET, ABILITY_SCRAPPY, BattleScript_ScarePrevented
+	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_ScarePrevented
+	jumpifability BS_TARGET, ABILITY_OBLIVIOUS, BattleScript_ScarePrevented
+.endif
+	jumpifability BS_TARGET, ABILITY_GUARD_DOG, BattleScript_ScareInReverse
+BattleScript_ScareEffect:
+	copybyte sBATTLER, gBattlerAttacker
+	setstatchanger STAT_ATK, 1, TRUE
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_ScareLoopIncrement
+	setgraphicalstatchangevalues
+	jumpifability BS_TARGET, ABILITY_CONTRARY, BattleScript_ScareContrary
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_ScareWontDecrease
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_PKMNCUTSSPATTACKWITH
+BattleScript_ScareEffect_WaitString:
+	waitmessage B_WAIT_TIME_LONG
+	saveattacker
+	savetarget
+	copybyte sBATTLER, gBattlerTarget
+	call BattleScript_TryIntimidateHoldEffects
+	restoreattacker
+	restoretarget
+BattleScript_ScareLoopIncrement:
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_ScareLoop
+	copybyte sBATTLER, gBattlerAttacker
+	destroyabilitypopup
+	restoretarget
+	pause B_WAIT_TIME_MED
+	end3
+
+BattleScript_ScarePrevented:
+	copybyte sBATTLER, gBattlerTarget
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNPREVENTSSTATLOSSWITH
+	goto BattleScript_ScareEffect_WaitString
+
+BattleScript_ScareWontDecrease:
+	printstring STRINGID_STATSWONTDECREASE
+	goto BattleScript_ScareEffect_WaitString
+
+BattleScript_ScareContrary:
+	call BattleScript_AbilityPopUpTarget
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_ScareContrary_WontIncrease
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	goto BattleScript_ScareEffect_WaitString
+BattleScript_ScareContrary_WontIncrease:
+	printstring STRINGID_TARGETSTATWONTGOHIGHER
+	goto BattleScript_ScareEffect_WaitString
+
+BattleScript_ScareInReverse:
+	copybyte sBATTLER, gBattlerTarget
+	call BattleScript_AbilityPopUpTarget
+	pause B_WAIT_TIME_SHORT
+	modifybattlerstatstage BS_TARGET, STAT_ATK, INCREASE, 1, BattleScript_ScareLoopIncrement, ANIM_ON
+	call BattleScript_TryIntimidateHoldEffects
+	goto BattleScript_ScareLoopIncrement
+// END CUSTOM INTIMIDATE (Stat Lower on change)
+
 BattleScript_SupersweetSyrupActivates::
  	savetarget
 .if B_ABILITY_POP_UP == TRUE

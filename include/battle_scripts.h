@@ -1,5 +1,6 @@
 #ifndef GUARD_BATTLE_SCRIPTS_H
 #define GUARD_BATTLE_SCRIPTS_H
+#include "gba/types.h"
 
 extern const u8 BattleScript_SupersweetSyrupActivates[];
 extern const u8 BattleScript_OpportunistCopyStatChange[];
@@ -513,6 +514,10 @@ extern const u8 BattleScript_BoosterEnergyRet[];
 extern const u8 BattleScript_TeraShellDistortingTypeMatchups[];
 extern const u8 BattleScript_TeraFormChange[];
 extern const u8 BattleScript_SleepClausePreventsEnd[];
+
+// START CUSTOM ABILITY
+extern const u8 BattleScript_ScareActivates[];
+// END CUSTOM ABILITY
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

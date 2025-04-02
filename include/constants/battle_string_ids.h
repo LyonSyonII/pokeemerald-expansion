@@ -730,7 +730,15 @@
 #define STRINGID_SENDCAUGHTMONPARTYORBOX              728
 #define STRINGID_PKMNSENTTOPCAFTERCATCH               729
 
-#define BATTLESTRINGS_COUNT                           730
+// START CUSTOM
+
+#define STRINGID_PKMNCUTSSPATTACKWITH 730
+
+#define BATTLESTRINGS_CUSTOM_COUNT 1
+
+// END CUSTOM
+
+#define BATTLESTRINGS_COUNT                           (730 + BATTLESTRINGS_CUSTOM_COUNT)
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

@@ -5369,6 +5369,24 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
+            // START CUSTOM ABILITYEFFECT_ON_SWITCHIN
+            case ABILITY_SCARE:
+            // `battler` is the current switched-in pokemon
+            // check if its ability has been activated already
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                // if not, mark it as attacker and set it to done
+                gBattlerAttacker = battler;
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                // lower all foe's sp atk
+                SET_STATCHANGER(STAT_SPATK, 1, TRUE);
+                // activate battle script (battle_scripts_1.s)
+                // intimidate at the moment
+                BattleScriptPushCursorAndCallback(BattleScript_ScareActivates);
+                effect++;
+            }
+            break;
+        // END CUSTOM ABILITYEFFECT_ON_SWITCHIN
         }
         break;
     case ABILITYEFFECT_ENDTURN:
@@ -5575,7 +5593,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                     effect++;
                 }
                 break;
-            }
+            } 
         }
         break;
     case ABILITYEFFECT_WOULD_BLOCK:
