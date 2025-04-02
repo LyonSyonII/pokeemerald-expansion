@@ -819,7 +819,9 @@ struct BattleStruct
     u8 pursuitStoredSwitch; // Stored id for the Pursuit target's switch
     s32 battlerExpReward;
     u16 prevTurnSpecies[MAX_BATTLERS_COUNT]; // Stores species the AI has in play at start of turn
+    /// The damage a battler will receive *when it makes a move*.
     s32 moveDamage[MAX_BATTLERS_COUNT];
+    /// The crit chance of the battler.
     s32 critChance[MAX_BATTLERS_COUNT];
     u16 moveResultFlags[MAX_BATTLERS_COUNT];
     u8 missStringId[MAX_BATTLERS_COUNT];
@@ -928,6 +930,9 @@ static inline bool32 IsBattleMoveRecoil(u32 move)
 
 #define SET_STAT_BUFF_VALUE(n) ((((n) << 3) & 0xF8))
 
+/// @param statId Stat that will change.
+/// @param stage By how many stages.
+/// @param goesDown If it will lower or raise the stat.
 #define SET_STATCHANGER(statId, stage, goesDown) (gBattleScripting.statChanger = (statId) + ((stage) << 3) + (goesDown << 7))
 #define SET_STATCHANGER2(dst, statId, stage, goesDown)(dst = (statId) + ((stage) << 3) + (goesDown << 7))
 
